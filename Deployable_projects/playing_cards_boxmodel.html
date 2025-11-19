@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playing Cards</title>
+    <style>
+      #playing-cards {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        background-color: lightblue;
+      }
+      .card {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 100px;
+        height: 200px;
+        padding: 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .left {
+        display: flex;
+        font-weight: bolder;
+        align-self: flex-start;
+      }
+      .right {
+        display: flex;
+        align-self: flex-end;
+        transform: rotate(180deg);
+      }
+      .middle {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+      }
+      p {
+        margin: 0px;
+        font-size: 24px;
+        font-weight: bolder;
+        padding: 0px;
+        line-height: 1;
+      }
+      .suit {
+        margin-left: -10px;
+        vertical-align: -0.75em;
+      }
+      .middle p {
+        font-size: 7em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="playing-cards">
+      <div class="card">
+        <div class="left">
+          <p>A<span class="suit">♠</span></p>
+        </div>
+        <div class="middle"><p>♠</p></div>
+        <div class="right">
+          <p>A<span class="suit">♠</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="left">
+          <p>4<span class="suit">♥</span></p>
+        </div>
+        <div class="middle">
+          <p>♥</p>
+        </div>
+        <div class="right">
+          <p>4<span class="suit">♥</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="left">
+          <p>4<span class="suit">♣</span></p>
+        </div>
+        <div class="middle"><p>♣</p></div>
+        <div class="right">
+          <p>4<span class="suit">♣</span></p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
