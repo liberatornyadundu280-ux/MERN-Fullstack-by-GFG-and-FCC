@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palindrome Checker</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding-top: 50px;
+        background-color: rgb(8, 3, 60);
+        color: #333;
+      }
+
+      #heading {
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      #workspace {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-shadow: 0 0 30px 5px rgba(0, 150, 255, 0.5);
+      }
+
+      #workspace > div {
+        display: flex;
+        width: 100%;
+        margin-top: 10px;
+        align-items: center;
+      }
+
+      #typing {
+        flex-grow: 1;
+        padding: 10px 0;
+        font-size: 16px;
+        border: none;
+        border-bottom: 2px solid #555;
+        margin: 10px 0;
+        background-color: transparent;
+      }
+
+      #typing:focus {
+        outline: none;
+        border-bottom-color: #007bff;
+      }
+
+      button {
+        padding: 10px 15px;
+        background-color: purple;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.2s;
+        margin-left: 10px;
+      }
+
+      button:hover {
+        background-color: #5d00a3;
+      }
+
+      #answer {
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #4caf50;
+        border-radius: 2rem;
+      }
+
+      #defination {
+        margin-top: 30px;
+        max-width: 500px;
+        text-align: center;
+        padding: 15px;
+        border-top: 1px dashed #ccc;
+        background-color: green;
+        border-radius: 2rem;
+        color: white;
+      }
+    </style>
+    <script>
+      function action() {
+        let check = document.getElementById("typing").value;
+        let res = check.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+        let i = res.length - 1;
+        let j = 0;
+        let f = true;
+
+        if (res.length === 0) {
+          document.getElementById("answer").innerText =
+            "Please enter text to check.";
+          return;
+        }
+
+        while (j < i) {
+          if (res[i] !== res[j]) {
+            f = false;
+            break;
+          }
+          i--;
+          j++;
+        }
+
+        if (f) {
+          document.getElementById(
+            "answer"
+          ).innerHTML = `<strong><i >${check}</i></strong>   is a Palindrome!`;
+        } else
+          document.getElementById(
+            "answer"
+          ).innerHTML = ` <strong><i >${check}</i></strong>  is not a Palindrome.`;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="heading">
+      <h1>Is it Palindrome?</h1>
+    </div>
+    <div id="workspace">
+      <label for="typing">Enter in text to check for a Palindrome</label>
+      <div>
+        <input type="text" placeholder="type here" id="typing" />
+        <button onclick="action()">Check</button>
+      </div>
+      <p id="answer"></p>
+    </div>
+    <div id="defination">
+      <p>
+        🔥 A palindrome is a word or sentence that's spelled the same way both
+        forward and backward, ignoring punctuation, case, and spacing.
+      </p>
+    </div>
+  </body>
+</html>
