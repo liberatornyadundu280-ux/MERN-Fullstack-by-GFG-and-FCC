@@ -1,0 +1,27 @@
+<body>
+    <h1>Event Listener examples</h1>
+    <p id="para">MouseOver this text to remove the event listener</p>
+    <button id="btn">Change background color</button>
+    
+    <script>
+      const bodyEl = document.querySelector("body");
+      const para = document.getElementById("para");
+      const btn = document.getElementById("btn");
+      
+      // ... (rest of the JavaScript code) ...
+      let isBgColorGrey = true;
+
+      function toggleBgColor() {
+        bodyEl.style.backgroundColor = isBgColorGrey ? "blue" : "grey";
+        isBgColorGrey = !isBgColorGrey;
+      }
+
+      btn.addEventListener("click", toggleBgColor);
+
+      para.addEventListener("mouseover", () => {
+        btn.removeEventListener("click", toggleBgColor);
+        console.log("Click listener removed from button!");
+      });
+    </script>
+  </body>
+</html>

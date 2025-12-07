@@ -93,7 +93,7 @@
     </style>
     <script>
       function action() {
-        let check = document.getElementById("typing").value;
+        let check = document.getElementById("typing").value.trim();
         let res = check.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
         let i = res.length - 1;
         let j = 0;
