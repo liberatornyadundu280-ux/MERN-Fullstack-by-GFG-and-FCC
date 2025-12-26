@@ -11,9 +11,9 @@ body {
 }
 #html-output,
 #preview {
-  height: 100px;
+  height: 300px;
   display: inline-block;
-  width: 100%;
+  width: auto;
   border: 1px solid #ccc;
   padding: 10px;
   margin: auto;
@@ -24,7 +24,7 @@ body {
   #markdown-input,
   #html-output,
   #preview {
-    height: 200px;
+    height: auto;
     margin: 0;
   }
   #container {
