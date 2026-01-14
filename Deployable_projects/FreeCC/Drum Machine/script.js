@@ -233,7 +233,10 @@ function clampVolume(value) {
 }
 
 function setVolume(value) {
-  if (!state.power) return;
+  if (!state.power) {
+    showToast("The power is off");
+    return;
+  }
   state.volume = clampVolume(value);
   DOM.volumeSlider.value = state.volume;
   updateDisplayText(`Volume: ${Math.round(state.volume * 100)}`);
@@ -266,7 +269,10 @@ function activatePad(key) {
    RECORDING
 ========================= */
 function startRecording() {
-  if (!state.power) return;
+  if (!state.power) {
+    showToast("The power is off");
+    return;
+  }
   state.isRecording = true;
   state.recordedEvents = [];
   state.recordStartTime = Date.now();
@@ -274,7 +280,10 @@ function startRecording() {
 }
 
 function stopRecording() {
-  if (!state.power) return;
+  if (!state.power) {
+    showToast("The power is off");
+    return;
+  }
   if (!state.isRecording) {
     showToast("No recording to stop");
     return;
@@ -290,7 +299,10 @@ function resetRecordingState() {
 }
 
 function playRecording() {
-  if (!state.power) return;
+  if (!state.power) {
+    showToast("The power is off");
+    return;
+  }
   if (state.recordedEvents.length === 0) {
     showToast("Nothing recorded to play");
     return;
@@ -329,12 +341,14 @@ function playRecordedKey(key) {
    CORE FUNCTION
 ========================= */
 function main(input, isEvent = true) {
-  if (!state.power) return;
-
+  if (!state.power) {
+    showToast("The power is off");
+    return;
+  }
   const key = input.toUpperCase();
   const drum = DRUM_MAP[state.currentBank][key];
   if (!drum) return;
-  if (isEvent) {
+  if (state.isPlaying && isEvent) {
     showToast("Cannot play while recording is playing");
     return;
   }
