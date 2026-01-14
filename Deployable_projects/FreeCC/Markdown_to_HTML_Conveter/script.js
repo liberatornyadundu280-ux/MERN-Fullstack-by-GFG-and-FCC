@@ -367,4 +367,45 @@ const expected = `
 <blockquote>quote</blockquote>
 `.trim();
 
-assertEqual(convertMarkdown(input).trim(), expected, "Mixed markdown");*/
+assertEqual(convertMarkdown(input).trim(), expected, "Mixed markdown");
+
+# Markdown Converter Demo
+
+This is a simple paragraph to test basic rendering.
+It should not have large gaps in the preview.
+
+## Text Formatting
+
+You can write **bold text**, *italic text*, or even mix **bold and _italic_ together**.
+
+Inline code should not be formatted: `**this is not bold**`
+
+### Links and Images
+
+Here is a link to [OpenAI](https://openai.com).
+
+Here is an image example:
+![Sample Image](me.jpg)
+
+## Lists
+
+- First list item
+- Second list item with **bold**
+- Third list item with *italic*
+
+## Quotes
+
+> This is a blockquote.
+> It should stay grouped and readable.
+
+## Mixed Content Test
+
+This paragraph contains **bold**, *italic*, a [link](https://example.com),
+and inline code like `console.log("Hello World");`.
+
+Another paragraph right after it to confirm spacing is correct.
+
+---
+
+End of demo.
+*/

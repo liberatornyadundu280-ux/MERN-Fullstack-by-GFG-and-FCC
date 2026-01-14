@@ -1,0 +1,27 @@
+main {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+#drum-machine {
+  background-color: navy;
+  display: block;
+  width: 100px;
+  height: 200px;
+}
+#pad-bank {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+.operators {
+  display: block;
+  flex-direction: column;
+  margin: auto;
+}
+.display {
+  background-color: whitesmoke;
+  border-radius: 2rem;
+  width: 20px;
+  height: 10px;
+}

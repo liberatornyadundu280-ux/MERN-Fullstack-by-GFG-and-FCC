@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Drum Machine</title>
+  </head>
+  <body>
+    <header class="site-header">
+      Enjoy the drum — play with Q W E / A S D / Z X C
+    </header>
+    <main>
+      <div id="drum-machine" class="container">
+        <section id="pad-bank" class="pad-grid">
+          <button class="pad" data-key="Q" data-sound="kick">
+            Q<br /><small>Kick</small>
+          </button>
+          <button class="pad" data-key="W" data-sound="snare">
+            W<br /><small>Snare</small>
+          </button>
+          <button class="pad" data-key="E" data-sound="hihat">
+            E<br /><small>Hi-hat</small>
+          </button>
+
+          <button class="pad" data-key="A" data-sound="kick">
+            A<br /><small>Kick↑</small>
+          </button>
+          <button class="pad" data-key="S" data-sound="snare">
+            S<br /><small>Snare↑</small>
+          </button>
+          <button class="pad" data-key="D" data-sound="hihat">
+            D<br /><small>Hat↑</small>
+          </button>
+
+          <button class="pad" data-key="Z" data-sound="kick">
+            Z<br /><small>Kick↓</small>
+          </button>
+          <button class="pad" data-key="X" data-sound="snare">
+            X<br /><small>Snare↓</small>
+          </button>
+          <button class="pad" data-key="C" data-sound="hihat">
+            C<br /><small>Hat↓</small>
+          </button>
+        </section>
+
+        <aside class="controls">
+          <div class="power">
+            <label>Power</label>
+            <input type="checkbox" id="power" checked />
+          </div>
+          <div id="display" class="display">Ready</div>
+          <div class="volume">
+            <label for="volume">Volume</label>
+            <input
+              type="range"
+              id="volume"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.8"
+            />
+          </div>
+        </aside>
+      </div>
+    </main>
+    <footer class="site-footer">
+      Built with WebAudio — click pads or press keys
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

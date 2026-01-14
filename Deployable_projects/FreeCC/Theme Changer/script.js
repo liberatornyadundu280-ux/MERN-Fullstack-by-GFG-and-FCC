@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       popup.style.opacity = "0";
       popup.style.transform = "translateY(20px)";
-    }, 3000);
+    }, 5000);
   };
 
   /**
