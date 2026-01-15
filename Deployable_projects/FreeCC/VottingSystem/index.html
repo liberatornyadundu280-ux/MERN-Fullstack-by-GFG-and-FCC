@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🗳️ Voting System</h1>
+      <p class="subtitle">Cast your vote and see the results in real-time</p>
+
+      <!-- Add Option Section -->
+      <div class="section">
+        <h2>➕ Add New Option</h2>
+        <div class="form-group">
+          <label for="optionInput">Option Name:</label>
+          <div class="button-group">
+            <input
+              type="text"
+              id="optionInput"
+              placeholder="Enter option name (e.g., Turkey, Morocco, Spain)"
+            />
+            <button class="btn-primary" onclick="addNewOption()">
+              Add Option
+            </button>
+          </div>
+        </div>
+        <div class="output-box" id="addOptionOutput"></div>
+      </div>
+
+      <!-- Vote Section -->
+      <div class="section">
+        <h2>🗳️ Cast Your Vote</h2>
+        <div class="two-column">
+          <div class="form-group">
+            <label for="voteOption">Select Option:</label>
+            <select id="voteOption">
+              <option value="">-- Choose an option --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="voterId">Voter ID:</label>
+            <input type="text" id="voterId" placeholder="Enter your voter ID" />
+          </div>
+        </div>
+        <button class="btn-primary" onclick="castVote()">Cast Vote</button>
+        <div class="output-box" id="voteOutput"></div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="section">
+        <h2>📊 Poll Results</h2>
+        <div class="action-buttons">
+          <button class="btn-info" onclick="displayCurrentResults()">
+            Show Results
+          </button>
+          <button class="btn-success" onclick="showWinner()">
+            Show Winner
+          </button>
+          <button class="btn-info" onclick="showTotalVotes()">
+            Total Votes
+          </button>
+        </div>
+        <div class="output-box" id="resultsOutput"></div>
+      </div>
+
+      <!-- Advanced Features -->
+      <div class="section">
+        <h2>⚙️ Advanced Features</h2>
+        <div class="two-column">
+          <div class="form-group">
+            <label for="removeVoteOption">Remove Vote - Option:</label>
+            <input
+              type="text"
+              id="removeVoteOption"
+              placeholder="Option name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="removeVoterId">Remove Vote - Voter ID:</label>
+            <input type="text" id="removeVoterId" placeholder="Voter ID" />
+          </div>
+        </div>
+        <button class="btn-danger" onclick="removeSpecificVote()">
+          Remove Vote
+        </button>
+
+        <div class="two-column" style="margin-top: 20px">
+          <div class="form-group">
+            <label for="checkVoterId">Check Voter Status:</label>
+            <input type="text" id="checkVoterId" placeholder="Voter ID" />
+          </div>
+          <div class="form-group">
+            <label for="checkOptionName">Get Option Votes:</label>
+            <input type="text" id="checkOptionName" placeholder="Option name" />
+          </div>
+        </div>
+        <button class="btn-info" onclick="checkVoterStatus()">
+          Check Voter
+        </button>
+        <button class="btn-info" onclick="getOptionVotes()">Get Votes</button>
+
+        <div class="action-buttons" style="margin-top: 20px">
+          <button class="btn-success" onclick="showAllOptions()">
+            Show All Options
+          </button>
+          <button class="btn-danger" onclick="resetAllVotes()">
+            Reset All Votes
+          </button>
+          <button class="btn-danger" onclick="showDetailedResults()">
+            Detailed Results
+          </button>
+        </div>
+
+        <div class="output-box" id="advancedOutput"></div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="section">
+        <h2>📈 Statistics</h2>
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card">
+            <div class="stat-label">Total Votes</div>
+            <div class="stat-value" id="totalVotesDisplay">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Options</div>
+            <div class="stat-value" id="totalOptionsDisplay">0</div>
+          </div>
+        </div>
+        <button
+          class="btn-primary"
+          style="margin-top: 20px"
+          onclick="updateStatistics()"
+        >
+          Refresh Statistics
+        </button>
+      </div>
+    </div>
+
+    <script src="VotingSystem.js"></script>
+    <script>
+      // Helper function to update option dropdown
+      function updateOptionDropdown() {
+        const options = getAllOptions();
+        const voteSelect = document.getElementById("voteOption");
+        const currentValue = voteSelect.value;
+        voteSelect.innerHTML =
+          '<option value="">-- Choose an option --</option>';
+        options.forEach((option) => {
+          const opt = document.createElement("option");
+          opt.value = option;
+          opt.textContent = option;
+          voteSelect.appendChild(opt);
+        });
+        if (currentValue && options.includes(currentValue)) {
+          voteSelect.value = currentValue;
+        }
+      }
+
+      // Add new option
+      function addNewOption() {
+        const optionInput = document.getElementById("optionInput");
+        const option = optionInput.value.trim();
+        const output = document.getElementById("addOptionOutput");
+
+        if (!option) {
+          output.innerHTML =
+            '<span class="error">Error: Option cannot be empty</span>';
+          return;
+        }
+
+        const result = addOption(option);
+        output.innerHTML = `<span class="${
+          result.includes("added") ? "success" : "error"
+        }">${result}</span>`;
+        optionInput.value = "";
+        updateOptionDropdown();
+        updateStatistics();
+      }
+
+      // Cast vote
+      function castVote() {
+        const option = document.getElementById("voteOption").value;
+        const voterId = document.getElementById("voterId").value.trim();
+        const output = document.getElementById("voteOutput");
+
+        if (!option) {
+          output.innerHTML =
+            '<span class="error">Error: Please select an option</span>';
+          return;
+        }
+        if (!voterId) {
+          output.innerHTML =
+            '<span class="error">Error: Voter ID cannot be empty</span>';
+          return;
+        }
+
+        const result = vote(option, voterId);
+        output.innerHTML = `<span class="${
+          result.includes("voted") ? "success" : "error"
+        }">${result}</span>`;
+        document.getElementById("voterId").value = "";
+        updateStatistics();
+      }
+
+      // Display results
+      function displayCurrentResults() {
+        const results = displayResults();
+        document.getElementById(
+          "resultsOutput"
+        ).innerHTML = `<span class="info">${results}</span>`;
+      }
+
+      // Show winner
+      function showWinner() {
+        const winner = getWinner();
+        document.getElementById(
+          "resultsOutput"
+        ).innerHTML = `<span class="success">${winner}</span>`;
+      }
+
+      // Show total votes
+      function showTotalVotes() {
+        const total = getTotalVotes();
+        document.getElementById(
+          "resultsOutput"
+        ).innerHTML = `<span class="info">Total Votes Cast: ${total}</span>`;
+      }
+
+      // Remove specific vote
+      function removeSpecificVote() {
+        const option = document.getElementById("removeVoteOption").value.trim();
+        const voterId = document.getElementById("removeVoterId").value.trim();
+        const output = document.getElementById("advancedOutput");
+
+        if (!option || !voterId) {
+          output.innerHTML =
+            '<span class="error">Error: Please fill in all fields</span>';
+          return;
+        }
+
+        const result = removeVote(option, voterId);
+        output.innerHTML = `<span class="${
+          result.includes("removed") ? "success" : "error"
+        }">${result}</span>`;
+        document.getElementById("removeVoteOption").value = "";
+        document.getElementById("removeVoterId").value = "";
+        updateStatistics();
+      }
+
+      // Check voter status
+      function checkVoterStatus() {
+        const voterId = document.getElementById("checkVoterId").value.trim();
+        const output = document.getElementById("advancedOutput");
+
+        if (!voterId) {
+          output.innerHTML =
+            '<span class="error">Error: Voter ID cannot be empty</span>';
+          return;
+        }
+
+        const result = hasVoterVoted(voterId);
+        output.innerHTML = `<span class="info">${result}</span>`;
+      }
+
+      // Get option votes
+      function getOptionVotes() {
+        const option = document.getElementById("checkOptionName").value.trim();
+        const output = document.getElementById("advancedOutput");
+
+        if (!option) {
+          output.innerHTML =
+            '<span class="error">Error: Option name cannot be empty</span>';
+          return;
+        }
+
+        const result = getVotesForOption(option);
+        output.innerHTML = `<span class="info">${result}</span>`;
+      }
+
+      // Show all options
+      function showAllOptions() {
+        const options = getAllOptions();
+        const output = document.getElementById("advancedOutput");
+
+        if (options.length === 0) {
+          output.innerHTML = '<span class="error">No options available</span>';
+          return;
+        }
+
+        let html = '<span class="info">Available Options:<br>';
+        options.forEach((opt, index) => {
+          html += `${index + 1}. ${opt}<br>`;
+        });
+        html += "</span>";
+        output.innerHTML = html;
+      }
+
+      // Reset all votes
+      function resetAllVotes() {
+        const result = resetPoll();
+        document.getElementById(
+          "advancedOutput"
+        ).innerHTML = `<span class="success">${result}</span>`;
+        updateStatistics();
+      }
+
+      // Show detailed results
+      function showDetailedResults() {
+        const results = getDetailedResults();
+        const output = document.getElementById("advancedOutput");
+
+        if (results.length === 0) {
+          output.innerHTML = '<span class="error">No results available</span>';
+          return;
+        }
+
+        let html =
+          '<span class="info">Detailed Results (Sorted by Votes):<br><br>';
+        results.forEach((result, index) => {
+          html += `${index + 1}. ${result.option}: ${result.votes} votes<br>`;
+        });
+        html += "</span>";
+        output.innerHTML = html;
+      }
+
+      // Update statistics
+      function updateStatistics() {
+        const totalVotes = getTotalVotes();
+        const totalOptions = getAllOptions().length;
+        document.getElementById("totalVotesDisplay").textContent = totalVotes;
+        document.getElementById("totalOptionsDisplay").textContent =
+          totalOptions;
+      }
+
+      // Initialize on page load
+      window.addEventListener("load", function () {
+        updateOptionDropdown();
+        updateStatistics();
+      });
+
+      // Add option on Enter key
+      document.addEventListener("keypress", function (e) {
+        if (e.target.id === "optionInput" && e.key === "Enter") {
+          addNewOption();
+        }
+      });
+    </script>
+  </body>
+</html>
