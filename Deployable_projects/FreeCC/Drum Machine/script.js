@@ -320,7 +320,7 @@ function playRecording() {
   });
   const lastTime = state.recordedEvents[state.recordedEvents.length - 1].time;
   setTimeout(() => {
-    state.isPlaying = true;
+    state.isPlaying = false;
     updateBankDisplay();
   }, lastTime + 200);
 }

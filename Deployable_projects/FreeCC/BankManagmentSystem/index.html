@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Management System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header>
+        <h1>💰 Bank Management System</h1>
+        <p>Manage your accounts with ease</p>
+      </header>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Account Selection & Info -->
+        <div class="account-section">
+          <div class="account-selector">
+            <label for="accountSelect">Select Account:</label>
+            <select id="accountSelect">
+              <option value="account1">Account 1 (Main)</option>
+              <option value="account2">Account 2 (Savings)</option>
+            </select>
+            <button class="btn btn-secondary" onclick="switchAccount()">
+              Switch
+            </button>
+          </div>
+
+          <!-- Balance Display -->
+          <div class="balance-card">
+            <h2>Current Balance</h2>
+            <p class="balance-amount" id="balanceDisplay">$0.00</p>
+            <div class="account-stats">
+              <div class="stat">
+                <span class="stat-label">Deposits</span>
+                <span class="stat-value" id="totalDepositsDisplay">$0.00</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Withdrawals</span>
+                <span class="stat-value" id="totalWithdrawalsDisplay"
+                  >$0.00</span
+                >
+              </div>
+              <div class="stat">
+                <span class="stat-label">Net Change</span>
+                <span class="stat-value" id="netChangeDisplay">$0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transaction Controls -->
+        <div class="controls-section">
+          <div class="control-group">
+            <h3>Quick Actions</h3>
+
+            <div class="action-card">
+              <h4>Deposit</h4>
+              <input
+                type="number"
+                id="depositAmount"
+                placeholder="Enter amount"
+                min="0"
+                step="0.01"
+              />
+              <button class="btn btn-success" onclick="handleDeposit()">
+                Deposit
+              </button>
+            </div>
+
+            <div class="action-card">
+              <h4>Withdraw</h4>
+              <input
+                type="number"
+                id="withdrawAmount"
+                placeholder="Enter amount"
+                min="0"
+                step="0.01"
+              />
+              <button class="btn btn-danger" onclick="handleWithdraw()">
+                Withdraw
+              </button>
+            </div>
+
+            <div class="action-card">
+              <h4>Apply Interest</h4>
+              <input
+                type="number"
+                id="interestRate"
+                placeholder="Enter rate (%)"
+                min="0"
+                step="0.1"
+                value="5"
+              />
+              <button class="btn btn-info" onclick="handleInterest()">
+                Apply
+              </button>
+            </div>
+          </div>
+
+          <!-- Additional Features -->
+          <div class="features-section">
+            <h3>Account Features</h3>
+            <button class="btn btn-outline" onclick="showAccountSummary()">
+              📊 Account Summary
+            </button>
+            <button class="btn btn-outline" onclick="showLargestTransaction()">
+              📈 Largest Transaction
+            </button>
+            <button class="btn btn-outline" onclick="showBalanceHistory()">
+              📅 Balance History
+            </button>
+            <button class="btn btn-outline" onclick="showTransactionHistory()">
+              📋 Transaction History
+            </button>
+            <button class="btn btn-outline" onclick="clearAllData()">
+              🗑️ Clear All Data
+            </button>
+          </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="history-section">
+          <h3>Recent Transactions</h3>
+          <div class="transaction-list" id="transactionList">
+            <p class="empty-state">No transactions yet</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Display -->
+      <div class="output-section">
+        <h3>Output</h3>
+        <div class="output-box" id="outputBox">
+          <p class="empty-state">Actions will appear here...</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Initialize on page load
+      window.addEventListener("DOMContentLoaded", () => {
+        currentAccount = myAccount;
+        updateUI();
+      });
+    </script>
+  </body>
+</html>
