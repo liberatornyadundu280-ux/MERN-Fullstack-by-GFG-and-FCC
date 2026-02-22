@@ -1,0 +1,80 @@
+export const cssJokePosts = [
+  {
+    id: 101,
+    title: "Centering divs is my cardio",
+    body: "Spent 40 minutes on align-items and justify-content. The div still said no.",
+    likes: 12,
+    comments: ["Try flex on parent.", "Classic frontend gym session."],
+  },
+  {
+    id: 102,
+    title: "z-index therapy session",
+    body: "My modal has z-index: 9999 and is still behind a random header.",
+    likes: 19,
+    comments: ["New stacking context entered the chat."],
+  },
+  {
+    id: 103,
+    title: "Specificity war update",
+    body: "I wrote one class. CSS replied with !important from 2019.",
+    likes: 25,
+    comments: ["Legacy CSS never forgets."],
+  },
+  {
+    id: 104,
+    title: "Dark mode confidence",
+    body: "Enabled dark mode and suddenly every gray looked emotionally unavailable.",
+    likes: 16,
+    comments: ["Gray-700 is a personality trait."],
+  },
+  {
+    id: 105,
+    title: "Responsive design plot twist",
+    body: "Looks perfect on my laptop. On mobile it became abstract art.",
+    likes: 31,
+    comments: ["Works on my screen is not QA."],
+  },
+];
+
+export const cssJokeUsers = [
+  {
+    id: 1,
+    name: "Flex Boxwell",
+    username: "flexwizard",
+    email: "flex@cssjokes.dev",
+    story: "Today I centered a div in one try. I am suspicious.",
+    followed: false,
+  },
+  {
+    id: 2,
+    name: "Zee Index",
+    username: "stackingcontext",
+    email: "zindex@cssjokes.dev",
+    story: "My tooltip disappeared behind a navbar with confidence.",
+    followed: false,
+  },
+  {
+    id: 3,
+    name: "Marge In",
+    username: "autocenter",
+    email: "margin@cssjokes.dev",
+    story: "margin: auto fixed my layout and my mood.",
+    followed: false,
+  },
+  {
+    id: 4,
+    name: "Paddy Ng",
+    username: "boxmodelboss",
+    email: "padding@cssjokes.dev",
+    story: "Added 16px padding. Suddenly it looked like a product.",
+    followed: false,
+  },
+  {
+    id: 5,
+    name: "Media Query",
+    username: "breakpointbae",
+    email: "media@cssjokes.dev",
+    story: "Desktop looked clean. Mobile looked personally offended.",
+    followed: false,
+  },
+];
